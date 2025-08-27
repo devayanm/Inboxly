@@ -1,10 +1,10 @@
 import React from 'react';
-import Footer from '../Components/Footer';
+import Footer from '../components/Footer';
 import { Moon, Sun, Check, Star, MessageSquare, Shield, Zap, Settings, Globe, Users, Github, Twitter, Mail } from 'lucide-react';
 
 import { Menu, X } from "lucide-react";
 import { useTheme } from '../App.jsx'; // Import the theme hook
-
+import Navbar from '../components/Navbar.jsx';
 import { useNavigate } from 'react-router-dom';
 // import banner from "../assets/banner.jpg"
 
@@ -144,8 +144,8 @@ const LandingPage = () => {
 
   return (
     <div className={`${isDark ? 'bg-[#0B0F19] text-slate-300' : 'bg-white text-slate-700'} font-poppins leading-relaxed transition-colors duration-300`}>
-    
-
+      {/* Header */}
+      <Navbar />
       {/* Main Content */}
       <main>
         {/* Hero Section */}
@@ -354,7 +354,7 @@ const LandingPage = () => {
       </main>
 
       {/* Footer */}
-<Footer />
+      <Footer />
     </div>
   );
 };

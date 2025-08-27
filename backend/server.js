@@ -21,6 +21,13 @@ const app = express();
 
 // Middleware
 app.use(express.json());
+ main
+
+app.use(cors({
+  origin:process.env.CORE_ORIGIN,
+  credentials:true
+}));
+ main
 app.use(cookieParser());
 
 app.use(

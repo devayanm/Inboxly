@@ -1,12 +1,18 @@
 import { Routes, Route, Link } from "react-router-dom";
 import { useEffect, useState, createContext, useContext } from "react";
-import Profile from "./Components/Profile.jsx";
-import WelcomeScreen from "./pages/Welcome.jsx";
+import Profile from "./components/Profile.jsx";
+import Welcome from "./pages/Welcome.jsx";
 import LandingPage from "./pages/Landing.jsx";
 import Auth from "./pages/Auth.jsx";
+ main
 import Navbar from "./Components/Navbar.jsx";
 import { Toaster } from 'react-hot-toast';
+
+import Navbar from "./components/Navbar.jsx";
+ main
 import "./App.css";
+import Homepage from "./pages/Homepage.jsx";
+import { Home } from "lucide-react";
 
 // Create Theme Context
 const ThemeContext = createContext();
@@ -58,27 +64,24 @@ const ThemeProvider = ({ children }) => {
 
 // Main App Component
 function AppContent() {
-  const [started, setStarted] = useState(false);
   const { isDark } = useTheme();
-
-  if (!started) {
-    return <WelcomeScreen onGetStarted={() => setStarted(true)} />;
-  }
 
   const backgroundClass = isDark ? "bg-[#000000]" : "bg-[#E5E5E5]";
 
   return (
     <div className={`min-h-screen transition-colors duration-300 ${backgroundClass}`}>
-      <Navbar />
+      {/* <Navbar /> */}
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/auth" element={<Auth />} />
-        <Route path="*" element={
+        <Route path="/welcome" element={<Welcome />} />
+        <Route path="/homepage" element={<Homepage />} />
+        {/* <Route path="*" element={
           <div className={`text-center p-4 ${isDark ? 'text-white' : 'text-slate-900'}`}>
             Page not found
           </div>
-        } />
+        } /> */}
       </Routes>
     </div>
   );

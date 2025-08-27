@@ -75,16 +75,16 @@ const Navbar = () => {
       {/* nav */}
       <nav className={`
         py-4 border-b sticky top-0 backdrop-blur-md z-50 transition-all duration-300
-        ${isDark 
-          ? 'border-slate-800 bg-[#0B0F19]/90 shadow-lg shadow-slate-900/20' 
+        ${isDark
+          ? 'border-slate-800 bg-[#0B0F19]/90 shadow-lg shadow-slate-900/20'
           : 'border-slate-200 bg-white/50 shadow-sm shadow-slate-900/5'
         }
       `}>
         <div className=" mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center">
-            
+
             {/* Logo - Clickable to go home */}
-            <div 
+            <div
               className="flex items-center gap-3 cursor-pointer"
               onClick={() => handleNavigation('/')}
             >
@@ -102,8 +102,8 @@ const Navbar = () => {
               onClick={() => setMenuOpen(!menuOpen)}
               className={`
                 md:hidden p-2 rounded-lg transition-colors duration-200
-                ${isDark 
-                  ? 'text-slate-400 hover:text-white hover:bg-slate-800' 
+                ${isDark
+                  ? 'text-slate-400 hover:text-white hover:bg-slate-800'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
                 }
               `}
@@ -121,8 +121,8 @@ const Navbar = () => {
                   onClick={() => handleNavigation(link.href)}
                   className={`
                     flex items-center gap-2 transition-all duration-200 cursor-pointer active:text-blue-500 active:scale-95
-                    ${isDark 
-                      ? 'text-slate-300 hover:text-white' 
+                    ${isDark
+                      ? 'text-slate-300 hover:text-white'
                       : 'text-slate-600 hover:text-slate-900'
                     }
                     hover:scale-105 transform
@@ -141,8 +141,8 @@ const Navbar = () => {
                 onClick={toggleTheme}
                 className={`
                   p-2 rounded-lg transition-all duration-200 cursor-pointer
-                  ${isDark 
-                    ? 'hover:bg-slate-800 text-slate-400 hover:text-yellow-400' 
+                  ${isDark
+                    ? 'hover:bg-slate-800 text-slate-400 hover:text-yellow-400'
                     : 'hover:bg-slate-100 text-slate-600 hover:text-blue-500'
                   }
                   hover:scale-110 transform
@@ -161,13 +161,25 @@ const Navbar = () => {
                 onClick={() => handleNavigation("/profile")}
                 className={`
                   px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 cursor-pointer
-                  ${isDark 
-                    ? 'text-slate-300 hover:text-white hover:bg-slate-800' 
+                  ${isDark
+                    ? 'text-slate-300 hover:text-white hover:bg-slate-800'
                     : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
                   }
                 `}
               >
-                Profile
+                profile
+              </button>
+              <button
+                onClick={() => handleNavigation("/auth")}
+                className={`
+                  px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 cursor-pointer
+                  ${isDark
+                    ? 'text-slate-300 hover:text-white hover:bg-slate-800'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                  }
+                `}
+              >
+                Login
               </button>
 
               {/* Get Started Button */}
@@ -201,8 +213,8 @@ const Navbar = () => {
                     onClick={() => handleMobileNavClick(link.href)}
                     className={`
                       flex items-center gap-3 p-3 rounded-lg transition-all duration-200 cursor-pointer text-left w-full active:text-blue-500 active:scale-95
-                      ${isDark 
-                        ? 'text-slate-300 hover:text-white hover:bg-slate-800/50' 
+                      ${isDark
+                        ? 'text-slate-300 hover:text-white hover:bg-slate-800/50'
                         : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
                       }
                     `}
@@ -219,8 +231,8 @@ const Navbar = () => {
                     onClick={toggleTheme}
                     className={`
                       flex items-center gap-3 p-3 rounded-lg transition-all duration-200 cursor-pointer w-full text-left
-                      ${isDark 
-                        ? 'text-slate-300 hover:text-white hover:bg-slate-800/50' 
+                      ${isDark
+                        ? 'text-slate-300 hover:text-white hover:bg-slate-800/50'
                         : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
                       }
                     `}
@@ -244,8 +256,8 @@ const Navbar = () => {
                     onClick={() => handleMobileNavClick("/profile")}
                     className={`
                       flex items-center gap-3 p-3 rounded-lg transition-all duration-200 cursor-pointer w-full text-left
-                      ${isDark 
-                        ? 'text-slate-300 hover:text-white hover:bg-slate-800/50' 
+                      ${isDark
+                        ? 'text-slate-300 hover:text-white hover:bg-slate-800/50'
                         : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
                       }
                     `}
@@ -275,7 +287,7 @@ const Navbar = () => {
 
       {/* Mobile Menu Overlay */}
       {menuOpen && (
-        <div 
+        <div
           className="md:hidden fixed inset-0 bg-black/20 backdrop-blur-sm z-40"
           onClick={() => setMenuOpen(false)}
         />
