@@ -4,6 +4,13 @@ import bcrypt from "bcrypt";
 const userSchema = new mongoose.Schema({
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
+ main
+    password: { type: String },
+    role: { type: String, enum: ["User", "Admin"], default: "user" },
+    refreshToken:{type:String},
+    googleId: { type: String, unique: true, sparse: true }
+
+
     password: { type: String, required: true },
 
       // Optional profile fields
@@ -15,6 +22,7 @@ const userSchema = new mongoose.Schema({
   
     role: { type: String, enum: ["User", "Admin"], default: "user" },
     refreshToken:{type:String}
+ main
 
 }, { collection: "users" });
 // Hash password before saving
