@@ -15,6 +15,10 @@ export default function Auth() {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
+  const API_BASE_URL = import.meta.env.DEV
+    ? "/api"
+    : import.meta.env.VITE_API_URL || "https://inboxly-q38f.onrender.com";
+
   // Handle form inputs
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -26,19 +30,29 @@ export default function Auth() {
     setMsg("");
     setError(null);
 
-    try {
-      const url = isLoginView ? "/api/auth/login" : "/api/auth/register";
-      const payload = isLoginView
-        ? { email: formData.email, password: formData.password }
-        : formData;
+    const url = isLoginView
+      ? `${API_BASE_URL}/auth/login`
+      : `${API_BASE_URL}/auth/register`;
 
+    const payload = isLoginView
+      ? { email: formData.email, password: formData.password }
+      : formData;
+
+    try {
       const res = await axios.post(url, payload, { withCredentials: true });
       setMsg(res.data.message || "Success!");
       localStorage.setItem("accessToken", res.data.access);
       console.log("User Data:", res.data.user);
       navigate("/dashboard");
     } catch (err) {
-      setError(err.response?.data?.message || "Something went wrong");
+      // Better error handling with axios error properties
+      if (err.response?.data?.message) {
+        setError(err.response.data.message);
+      } else if (err.message) {
+        setError(err.message);
+      } else {
+        setError("Something went wrong");
+      }
     } finally {
       setLoading(false);
     }
@@ -68,8 +82,7 @@ export default function Auth() {
             Inboxly
           </h1>
           <p className="text-slate-300 text-lg mb-6">
-            The open-source messenger platform for seamless team and product
-            communication.
+            The open-source messenger platform for seamless team and product communication.
           </p>
         </div>
 
@@ -79,9 +92,7 @@ export default function Auth() {
             {isLoginView ? "Welcome Back" : "Create an Account"}
           </h2>
           <p className="text-slate-400 mb-6">
-            {isLoginView
-              ? "Log in to continue"
-              : "Start your journey with Inboxly"}
+            {isLoginView ? "Log in to continue" : "Start your journey with Inboxly"}
           </p>
 
           {error && (
