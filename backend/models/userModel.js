@@ -4,9 +4,11 @@ import bcrypt from "bcrypt";
 const userSchema = new mongoose.Schema({
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-    role: { type: String, enum: ["user", "admin"], default: "user" },
-    refreshToken:{type:String}
+    password: { type: String },
+    role: { type: String, enum: ["User", "Admin"], default: "user" },
+    refreshToken:{type:String},
+    googleId: { type: String, unique: true, sparse: true }
+
 
 }, { collection: "users" });
 // Hash password before saving

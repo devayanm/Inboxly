@@ -5,6 +5,7 @@ import WelcomeScreen from "./pages/Welcome.jsx";
 import LandingPage from "./pages/Landing.jsx";
 import Auth from "./pages/Auth.jsx";
 import Navbar from "./Components/Navbar.jsx";
+import { Toaster } from 'react-hot-toast';
 import "./App.css";
 
 // Create Theme Context
@@ -88,6 +89,7 @@ export default function App() {
   return (
     <ThemeProvider>
       <AppContent />
+       <Toaster position="top-center" reverseOrder={false} />
     </ThemeProvider>
   );
 }
