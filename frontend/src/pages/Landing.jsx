@@ -1,10 +1,10 @@
 import React from 'react';
-import Footer from '../Components/Footer';
+import Footer from '../components/Footer';
 import { Moon, Sun, Check, Star, MessageSquare, Shield, Zap, Settings, Globe, Users, Github, Twitter, Mail } from 'lucide-react';
 
 import { Menu, X } from "lucide-react";
 import { useTheme } from '../App.jsx'; // Import the theme hook
-import Navbar from '../Components/Navbar.jsx';
+import Navbar from '../components/Navbar.jsx';
 import { useNavigate } from 'react-router-dom';
 // import banner from "../assets/banner.jpg"
 

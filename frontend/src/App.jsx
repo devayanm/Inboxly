@@ -1,10 +1,10 @@
 import { Routes, Route, Link } from "react-router-dom";
 import { useEffect, useState, createContext, useContext } from "react";
-import Profile from "./Components/Profile.jsx";
+import Profile from "./components/Profile.jsx";
 import Welcome from "./pages/Welcome.jsx";
 import LandingPage from "./pages/Landing.jsx";
 import Auth from "./pages/Auth.jsx";
-import Navbar from "./Components/Navbar.jsx";
+import Navbar from "./components/Navbar.jsx";
 import "./App.css";
 import Homepage from "./pages/Homepage.jsx";
 import { Home } from "lucide-react";
