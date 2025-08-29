@@ -11,17 +11,49 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+.google-icon {
+  height: 20px;
+cursor: pointer;
+
+}
+
+.google-button {
+  display: inline-flex; /* instead of flex */
+  align-items: center;
+cursor: pointer;
+  
+  gap: 10px;
+  justify-content: center;
+  border: 1px solid white;
+  border-radius: 10px;
+  width: 300px;
+  padding: 3px 8px; /* add horizontal padding for spacing */
+}
+.google-btn-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.form-wrapper { 
+      gap: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
