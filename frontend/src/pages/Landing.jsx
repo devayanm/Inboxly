@@ -8,6 +8,7 @@ import { useTheme } from '../App.jsx'; // Import the theme hook
 import { useNavigate } from 'react-router-dom';
 // import banner from "../assets/banner.jpg"
 
+
 import banner from './banner.jpg';
 const IconWrapper = ({ children, className }) => (
   <svg
@@ -121,6 +122,60 @@ const LandingPage = () => {
     },
   ];
 
+  //Pricing Plans
+  const pricingPlans = [
+    {
+      plan: "Free",
+      descriptions: "Perfect for individuals and small projects just getting started.",
+      price: "$ 10.00",
+      discount: "Free",
+      discountedPrice: "$ 0.00 ",
+      features: [
+        "Real-time messaging with typing indicators",
+        "Basic push notifications",
+        "Up to 50 active users",
+        "Access to community support",
+        "Core SDK & UI components",
+      ],
+      isPopular: false,
+    },
+    {
+      plan: "Premium",
+      descriptions: "Best for growing teams that need reliability, security, and flexibility.",
+      price: "$ 12.00",
+      discount: "SAVE 30%",
+      discountedPrice: "$ 9.40",
+      features: [
+        "Everything in Free, plus",
+        "Unlimited users & message history",
+        "Advanced moderation tools & audit logs",
+        "Custom themes and branding",
+        "REST & GraphQL API access",
+        "SSO & 2FA authentication",
+        "Priority email support",
+
+      ],
+      isPopular: true,
+    },
+    {
+      plan: "Business",
+      descriptions: "Scalable, secure, and customizable for enterprise needs.",
+      price: "$ 20.00",
+      discount: "SAVE 20%",
+      discountedPrice: "$ 16.00",
+      features: [
+        "Everything in Premium, plus",
+        "Dedicated infrastructure & global edge network",
+        "99.99% uptime SLA",
+        "End-to-end encryption & compliance (SOC 2, GDPR, HIPAA)",
+        "Data residency options",
+        "Custom integrations (Slack, Zendesk, Segment, etc.)",
+        "Dedicated success manager & 24/7 support",
+      ],
+      isPopular: false,
+    }
+  ];
+
   const CodeSnippet = ({ title, language, children }) => (
     <div className={`${isDark ? 'bg-[#171C2A] border-slate-700' : 'bg-slate-100 border-slate-300'} border rounded-lg overflow-hidden`}>
       <div className={`flex justify-between items-center px-4 py-2 ${isDark ? 'bg-slate-800/50 border-slate-700' : 'bg-slate-200/50 border-slate-300'} border-b`}>
@@ -144,7 +199,7 @@ const LandingPage = () => {
 
   return (
     <div className={`${isDark ? 'bg-[#0B0F19] text-slate-300' : 'bg-white text-slate-700'} font-poppins leading-relaxed transition-colors duration-300`}>
-    
+
 
       {/* Main Content */}
       <main>
@@ -328,6 +383,76 @@ const LandingPage = () => {
           </div>
         </section>
 
+        <hr className={`${isDark ? 'border-slate-800' : 'border-slate-200'}`} />
+
+
+        {/* Pricing Section */}
+        <section id="pricing" className="py-20">
+          <div className="container mx-auto px-4 text-center">
+            <h2 className={`text-4xl font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>Explore Plans</h2>
+            <div className={`mt-4 max-w-2xl mx-auto ${isDark ? 'text-slate-400' : 'text-slate-600'} mb-20`}>
+              <p>From Startups to Enterprises, our pricing is built to scale with your growth.</p>
+              <p>Start for free, upgrade when you need more features,</p>
+              <p>and never pay for what you don’t use.</p>
+            </div>
+            {/* Pricing Plan-Card */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {pricingPlans.map((plans, idx) => {
+                return (
+                  <div key={idx}
+                    className={` group relative flex flex-col transition-transform duration-300 ease-in-out hover:scale-102
+                      ${isDark ? 'bg-[#171C2A] border-slate-800' : 'bg-white border-slate-800 shadow-grey-500'}
+                      ${plans.isPopular ? "border-3 border-yellow-200" : "border-grey-500 shadow-white-100"} hover:shadow-2xl rounded-lg p-6 shadow-lg`}>
+
+                    <div className='flex-1'>
+                      <h1 className={`text-xl font-bold group-hover:scale-105 group-hover:text-[#8C52FF] ${isDark ? 'text-[#ffffff]' : 'text-[black]'}`}>{plans.plan}</h1>
+                      <p className={`text-md p-6 ${isDark ? 'text-[#ffffff]' : 'text-[black]'}`}>{plans.descriptions}</p>
+
+                      {plans.isPopular && (
+                        <div className='absolute top-0 -translate-y-1/2 rounded-full px-2 py-2 bg-yellow-500 text-black text-xs'>Most Popular</div>
+                      )
+                      }
+
+                      <div className='space-y-4'>
+
+                        <div className='flex items-center gap-4'>
+                          <span className='text-xl text-grey-500 line-through'>{plans.price}</span>
+                          <span className='text-sm font-semibold text-slate-700 bg-[#d5dfff] px-4 py-1 rounded-full'>{plans.discount}</span>
+                        </div>
+
+                        <div>
+                          <h1 className='text-xl text-slate-800 bg-slate-200 left-0 p-4 rounded-md:border-2 border-grey-300 '>
+                            <span className='text-3xl font-bold'>{plans.discountedPrice}</span> /month
+                          </h1>
+                          <ul className='list-none m-5 text-sm text-grey-600 space-y-2 text-left'>
+                            {plans.features.map((feature, id) => (
+                              <li className='flex items-center gap-2' key={id}>
+                                <CheckIcon /><p>{feature}</p>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                      </div>
+
+                    </div>
+
+                    <button className="mt-auto text-lg w-full bg-gradient-to-r from-[#A57BFF] to-[#8C52FF] font-semibold p-3 text-white rounded-md cursor-pointer 
+  transform transition-transform duration-300 hover:-translate-y-1">
+                      Choose plan
+                    </button>
+
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+
+        <hr className={`${isDark ? 'border-slate-800' : 'border-slate-200'}`} />
+
+
         {/* CTA Section */}
         <section className="py-20">
           <div className="container mx-auto px-4 text-center">
@@ -354,7 +479,7 @@ const LandingPage = () => {
       </main>
 
       {/* Footer */}
-<Footer />
+      <Footer />
     </div>
   );
 };
