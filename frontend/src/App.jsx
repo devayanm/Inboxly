@@ -4,16 +4,11 @@ import Profile from "./components/Profile.jsx";
 import Welcome from "./pages/Welcome.jsx";
 import LandingPage from "./pages/Landing.jsx";
 import Auth from "./pages/Auth.jsx";
- main
-import Navbar from "./Components/Navbar.jsx";
+import Navbar from "./components/Navbar.jsx"; // Keep only this one
 import { Toaster } from 'react-hot-toast';
-
-import Navbar from "./components/Navbar.jsx";
- main
 import "./App.css";
 import Homepage from "./pages/Homepage.jsx";
 import { Home } from "lucide-react";
-
 // Create Theme Context
 const ThemeContext = createContext();
 

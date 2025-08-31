@@ -1,9 +1,11 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useTheme } from '../App.jsx'; // Import the theme hook
+import { useNavigate } from 'react-router-dom';
 
 function Profile() {
 	const { isDark } = useTheme(); // Use centralized theme
+	const navigate = useNavigate(); // For navigation
 	
 	const emptyProfile = {
 		fullName: '',
@@ -112,6 +114,21 @@ function Profile() {
 
   return (
 		<div className={(isDark ? "bg-[#000000] text-[#FFFFFF]" : "bg-[#FFFFFF] text-[#14213D]") + " min-h-screen w-full p-0"}>
+			{/* Back to Home button */}
+			<motion.button
+				onClick={() => navigate('/')}
+				className={(isDark ? "bg-[#14213D] text-[#FFFFFF]" : "bg-[#E5E5E5] text-[#14213D]") + " fixed top-4 left-4 z-10 flex items-center gap-2 rounded-lg px-4 py-2 shadow-md hover:brightness-110"}
+				whileHover={{ scale: 1.05 }}
+				whileTap={{ scale: 0.95 }}
+				initial={{ opacity: 0, x: -20 }}
+				animate={{ opacity: 1, x: 0 }}
+				transition={{ duration: 0.3 }}
+			>
+				<svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+					<path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
+				</svg>
+				Back to Home
+			</motion.button>
 			<motion.div
 				className={(isDark ? "bg-[#14213D]" : "bg-[#E5E5E5]") + " w-full rounded-none shadow-none ring-0 overflow-hidden"}
 				variants={containerVariants}
