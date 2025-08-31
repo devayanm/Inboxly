@@ -6,6 +6,8 @@ import LandingPage from "./pages/Landing.jsx";
 import Auth from "./pages/Auth.jsx";
 import Navbar from "./Components/Navbar.jsx";
 import "./App.css";
+import Docs from "./pages/docs.jsx";
+
 
 // Create Theme Context
 const ThemeContext = createContext();
@@ -73,6 +75,7 @@ function AppContent() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/auth" element={<Auth />} />
+        <Route path="/docs" element={<Docs />} />
         <Route path="*" element={
           <div className={`text-center p-4 ${isDark ? 'text-white' : 'text-slate-900'}`}>
             Page not found

@@ -342,12 +342,14 @@ const LandingPage = () => {
               >
                 Get Started for Free
               </button>
-              <button
-                onClick={() => navigate('/docs')}
-                className={`${isDark ? 'bg-slate-800 text-slate-200 border-slate-700 hover:bg-slate-700' : 'bg-slate-200 text-slate-900 border-slate-300 hover:bg-slate-300'} font-semibold py-3 px-6 rounded-lg border transition-colors w-full sm:w-auto cursor-pointer`}
-              >
-                View Documentation
-              </button>
+            <button
+               onClick={() => navigate("/docs")}
+                  
+  className={`${isDark ? 'bg-slate-800 text-slate-200 border-slate-700 hover:bg-slate-700' : 'bg-slate-200 text-slate-900 border-slate-300 hover:bg-slate-300'} font-semibold py-3 px-6 rounded-lg border transition-colors w-full sm:w-auto cursor-pointer`}
+>
+  View Documentation
+</button>
+
             </div>
           </div>
         </section>

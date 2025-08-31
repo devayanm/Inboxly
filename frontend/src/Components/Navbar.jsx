@@ -31,7 +31,8 @@ const Navbar = () => {
       }
     } else {
       // Use React Router navigation for routes
-      navigate(path);
+      navigate(path); 
+      window.scrollTo({ top: 0, behavior: 'smooth' });   
     }
   };
 
@@ -66,7 +67,7 @@ const Navbar = () => {
   const navLinks = [
     { href: '#features', label: 'Features', icon: <Zap className="w-4 h-4" /> },
     { href: '#pricing', label: 'Pricing', icon: <Star className="w-4 h-4" /> },
-    { href: '#docs', label: 'Docs', icon: <MessageSquare className="w-4 h-4" /> },
+    { href: '/docs', label: 'Docs', icon: <MessageSquare className="w-4 h-4" /> },
     { href: '#company', label: 'Company', icon: <Users className="w-4 h-4" /> }
   ];
 
