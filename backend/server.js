@@ -7,10 +7,9 @@ import authRoutes from "./routes/authRoutes.js";
 import connectDB from "./config/db.js";
 import cookieParser from "cookie-parser";
 import "./googleAuth/passport.js";
-// Uncomment the next line if you have admin routes
-// import adminRoutes from "./routes/adminRoutes.js";
+// import adminRoutes from "./routes/adminRoutes.js"; // Uncomment if you have admin routes
 
-dotenv.config(); // loads .env automatically
+dotenv.config(); // Load .env automatically
 
 const PORT = process.env.PORT || 3000;
 
@@ -21,40 +20,32 @@ const app = express();
 
 // Middleware
 app.use(express.json());
- main
-
-app.use(cors({
-  origin:process.env.CORE_ORIGIN,
-  credentials:true
-}));
- main
 app.use(cookieParser());
 
-app.use(
-  cors({
-    origin: process.env.CLIENT_URL,
-    credentials: true,
-  })
-);
+// Use only one CORS middleware to avoid duplicate preflight issues
+app.use(cors({
+  origin: process.env.CLIENT_URL || process.env.CORE_ORIGIN,
+  credentials: true,
+}));
 
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET || "your-secret-key", // put in .env
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      secure: false, // set true only if you're using HTTPS
-      maxAge: 24 * 60 * 60 * 1000, // 1 day
-    },
-  })
-);
+// Session middleware
+app.use(session({
+  secret: process.env.SESSION_SECRET || "your-secret-key", // Use a secure key in production
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    secure: false, // Set true if using HTTPS
+    maxAge: 24 * 60 * 60 * 1000, // 1 day
+  },
+}));
 
+// Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
 
 // Routes
 app.use("/api/auth", authRoutes);
-// app.use("/api/admin", adminRoutes); // uncomment if admin routes exist
+// app.use("/api/admin", adminRoutes); // Uncomment if admin routes exist
 
 // Test route
 app.get("/", (req, res) => {
