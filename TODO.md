@@ -1,0 +1,1 @@
+- [x] Change banner background in Profile.jsx to white in light mode and make upload text always visible

@@ -120,12 +120,12 @@ function Profile() {
 			>
 				{/* Banner area */}
 				<div className="relative h-44 sm:h-56 md:h-64 cursor-pointer group" onClick={() => bannerInputRef.current && bannerInputRef.current.click()}>
-					{draftProfile.bannerUrl ? (
-						<img src={draftProfile.bannerUrl} alt="Banner" className="absolute inset-0 h-full w-full object-cover" />
-					) : (
-						<div className={"absolute inset-0 " + (isDark ? "bg-[#FCA311]" : "bg-[#14213D]")} />
-					)}
-					<div className={(isDark ? "bg-black/30" : "bg-black/20") + " absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-sm"}>Click to upload banner</div>
+{draftProfile.bannerUrl ? (
+  <img src={draftProfile.bannerUrl} alt="Banner" className="absolute inset-0 h-full w-full object-cover" />
+) : (
+  <div className={"absolute inset-0 " + (isDark ? "bg-[#14213D]" : "bg-white")} />
+)}
+					<div className={(isDark ? "bg-black/30 opacity-100" : "bg-black/20 opacity-100") + " absolute inset-0 transition-opacity flex items-center justify-center text-sm font-bold " + (isDark ? "text-white" : "text-[#14213D]")}>Click to upload banner</div>
 					<input ref={bannerInputRef} type="file" accept="image/*" className="hidden" onChange={handleBannerFileChange} />
 
 					{/* Delete banner button when image present */}
