@@ -100,18 +100,16 @@ export default function Auth() {
             {isLoginView ? "Log in to continue" : "Start your journey with Inboxly"}
           </p>
           <div className="form-wrapper">
-            {isLoginView && (
-              <div className="google-btn-wrapper mb-4">
-                <button className="google-button flex items-center gap-2" onClick={handleGoogleLogin}>
-                  <img
-                    src={googleicon}
-                    alt="Google Icon"
-                    className="w-5 h-5"
-                  />
-                  Continue with Google
-                </button>
-              </div>
-            )}
+            <div className="google-btn-wrapper mb-4">
+              <button className="google-button flex items-center gap-2" onClick={handleGoogleLogin}>
+                <img
+                  src={googleicon}
+                  alt="Google Icon"
+                  className="w-5 h-5"
+                />
+                {isLoginView ? "Continue with Google" : "Sign up with Google"}
+              </button>
+            </div>
             {error && (
               <p className="mb-4 text-sm text-center text-red-400">{error}</p>
             )}
