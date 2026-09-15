@@ -8,6 +8,26 @@ const handleGoogleLogin = () => {
   window.location.href = `${import.meta.env.VITE_API_URL}/api/auth/google`;
 };
 
+function validateSignupFields(formData) {
+  const errors = {};
+  if (!formData.name.trim()) {
+    errors.name = "Full name is required.";
+  } else if (formData.name.trim().length < 2) {
+    errors.name = "Name must be at least 2 characters.";
+  }
+  if (!formData.email.trim()) {
+    errors.email = "Email is required.";
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+    errors.email = "Please enter a valid email address.";
+  }
+  if (!formData.password) {
+    errors.password = "Password is required.";
+  } else if (formData.password.length < 6) {
+    errors.password = "Password must be at least 6 characters.";
+  }
+  return errors;
+}
+
 export default function Auth() {
   const [isLoginView, setIsLoginView] = useState(true);
   const [formData, setFormData] = useState({
@@ -19,21 +39,32 @@ export default function Auth() {
   const [loading, setLoading] = useState(false);
   const [msg, setMsg] = useState("");
   const [error, setError] = useState(null);
+  const [fieldErrors, setFieldErrors] = useState({});
   const navigate = useNavigate();
 
   const API_BASE_URL =
     import.meta.env.VITE_API_URL || "https://inboxly-q38f.onrender.com";
 
-  // Handle form inputs
-  const handleChange = (e) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    if (fieldErrors[name]) {
+      setFieldErrors({ ...fieldErrors, [name]: "" });
+    }
+  };
 
-  // Handle submit
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
     setMsg("");
     setError(null);
+
+    if (!isLoginView) {
+      const errors = validateSignupFields(formData);
+      setFieldErrors(errors);
+      if (Object.keys(errors).length > 0) return;
+    }
+
+    setLoading(true);
 
     const url = isLoginView
       ? `${API_BASE_URL}/api/auth/login`
@@ -50,23 +81,17 @@ export default function Auth() {
       if (isLoginView) {
         navigate("/dashboard");
       } else {
-        setIsLoginView(true); // Switch to login after registration
+        setIsLoginView(true);
       }
     } catch (err) {
-      if (err.response?.data?.message) {
-        setError(err.response.data.message);
-      } else if (err.message) {
-        setError(err.message);
-      } else {
-        setError("Something went wrong");
-      }
-      toast.error(error);
+      const errMsg = err.response?.data?.message || err.message || "Something went wrong";
+      setError(errMsg);
+      toast.error(errMsg);
     } finally {
       setLoading(false);
     }
   };
 
-  // Demo login (mock)
   const handleDemoLogin = () => {
     setLoading(true);
     setMsg("");
@@ -80,6 +105,11 @@ export default function Auth() {
       navigate("/welcome");
     }, 1000);
   };
+
+  const inputClass = (field) =>
+    `w-full px-4 py-3 bg-slate-700 border rounded-lg ${
+      fieldErrors[field] ? "border-red-500" : "border-slate-600"
+    }`;
 
   return (
     <div className="min-h-screen bg-slate-900 text-white font-sans flex items-center justify-center p-4 ">
@@ -118,23 +148,29 @@ export default function Auth() {
             {msg && (
               <p className="mb-4 text-sm text-center text-green-400">{msg}</p>
             )}
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} noValidate className="space-y-4">
               {!isLoginView && (
                 <>
                   <div>
-                    <label className="block text-sm mb-1">Full Name</label>
+                    <label htmlFor="name" className="block text-sm mb-1">Full Name</label>
                     <input
+                      id="name"
                       type="text"
                       name="name"
                       onChange={handleChange}
-                      className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg"
+                      className={inputClass("name")}
                       placeholder="John Doe"
-                      required
+                      aria-invalid={!!fieldErrors.name}
+                      aria-describedby={fieldErrors.name ? "name-error" : undefined}
                     />
+                    {fieldErrors.name && (
+                      <p id="name-error" className="mt-1 text-sm text-red-400" role="alert">{fieldErrors.name}</p>
+                    )}
                   </div>
                   <div>
-                    <label className="block text-sm mb-1">Role</label>
+                    <label htmlFor="role" className="block text-sm mb-1">Role</label>
                     <select
+                      id="role"
                       name="role"
                       onChange={handleChange}
                       className="w-full px-4 py-3 pr-3 bg-slate-700 border border-slate-600 rounded-lg"
@@ -146,26 +182,36 @@ export default function Auth() {
                 </>
               )}
               <div>
-                <label className="block text-sm mb-1">Email</label>
+                <label htmlFor="email" className="block text-sm mb-1">Email</label>
                 <input
+                  id="email"
                   type="email"
                   name="email"
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg"
+                  className={inputClass("email")}
                   placeholder="you@example.com"
-                  required
+                  aria-invalid={!!fieldErrors.email}
+                  aria-describedby={fieldErrors.email ? "email-error" : undefined}
                 />
+                {fieldErrors.email && (
+                  <p id="email-error" className="mt-1 text-sm text-red-400" role="alert">{fieldErrors.email}</p>
+                )}
               </div>
               <div>
-                <label className="block text-sm mb-1">Password</label>
+                <label htmlFor="password" className="block text-sm mb-1">Password</label>
                 <input
+                  id="password"
                   type="password"
                   name="password"
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg"
+                  className={inputClass("password")}
                   placeholder="••••••••"
-                  required
+                  aria-invalid={!!fieldErrors.password}
+                  aria-describedby={fieldErrors.password ? "password-error" : undefined}
                 />
+                {fieldErrors.password && (
+                  <p id="password-error" className="mt-1 text-sm text-red-400" role="alert">{fieldErrors.password}</p>
+                )}
               </div>
               <button
                 type="submit"
@@ -190,7 +236,12 @@ export default function Auth() {
               {isLoginView ? "Don't have an account?" : "Already have an account?"}{" "}
               <button
                 type="button"
-                onClick={() => setIsLoginView(!isLoginView)}
+                onClick={() => {
+                  setIsLoginView(!isLoginView);
+                  setFieldErrors({});
+                  setError(null);
+                  setMsg("");
+                }}
                 className="text-blue-400 hover:underline ml-2"
               >
                 {isLoginView ? "Sign Up" : "Log In"}
