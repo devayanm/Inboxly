@@ -88,7 +88,7 @@ const Footer = () => {
             </p>
 
             {/* Newsletter Signup */}
-            {/* <div className="space-y-3">
+            <div className="space-y-3">
               <p className={`${isDark ? 'text-white' : 'text-slate-900'} font-medium text-sm`}>
                 Stay updated
               </p>
@@ -98,8 +98,8 @@ const Footer = () => {
                   placeholder="Enter your email"
                   className={`
                     px-4 py-2 rounded-lg text-sm border transition-colors
-                    ${isDark 
-                      ? 'bg-slate-800 border-slate-700 text-white placeholder-slate-400 focus:border-blue-500' 
+                    ${isDark
+                      ? 'bg-slate-800 border-slate-700 text-white placeholder-slate-400 focus:border-blue-500'
                       : 'bg-white border-slate-300 text-slate-900 placeholder-slate-500 focus:border-blue-500'
                     }
                     focus:outline-none focus:ring-2 focus:ring-blue-500/20
@@ -108,8 +108,17 @@ const Footer = () => {
                 <button className="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:from-blue-600 hover:to-purple-700 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20">
                   Subscribe
                 </button>
+                <button className={`text-xs transition-colors ${isDark ? 'text-slate-500 hover:text-slate-300' : 'text-slate-400 hover:text-slate-600'}`}>
+                  No thanks
+                </button>
               </div>
-            </div> */}
+              <p className={`text-xs ${isDark ? 'text-slate-500' : 'text-slate-400'}`}>
+                By subscribing you agree to our{' '}
+                <a href="#" className={`underline transition-colors ${isDark ? 'hover:text-slate-300' : 'hover:text-slate-600'}`}>Terms of Service</a>
+                {' '}and{' '}
+                <a href="#" className={`underline transition-colors ${isDark ? 'hover:text-slate-300' : 'hover:text-slate-600'}`}>Privacy Policy</a>.
+              </p>
+            </div>
           </div>
           <div className="lg:col-span-2 grid grid-cols-2 md:grid-cols-4 gap-6">
             {/* Footer Links - Each section takes 1 column */}
