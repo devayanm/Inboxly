@@ -480,9 +480,85 @@ const LandingPage = () => {
         </section>
       </main>
 
+      {/* Feedback & Reviews Section */}
+      <section className={`py-16 px-4 ${isDark ? 'bg-slate-800' : 'bg-slate-50'}`}>
+        <div className="max-w-2xl mx-auto text-center">
+          <h2 className={`text-3xl font-bold mb-3 ${isDark ? 'text-white' : 'text-slate-900'}`}>
+            Share Your Feedback
+          </h2>
+          <p className={`mb-8 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+            We'd love to hear what you think about Inboxly.
+          </p>
+          <FeedbackForm isDark={isDark} />
+        </div>
+      </section>
+
       {/* Footer */}
       <Footer />
     </div>
+  );
+};
+
+const FeedbackForm = ({ isDark }) => {
+  const [submitted, setSubmitted] = React.useState(false);
+  const [form, setForm] = React.useState({ name: '', message: '' });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!form.name.trim() || !form.message.trim()) return;
+    setSubmitted(true);
+  };
+
+  const inputClass = `w-full px-4 py-3 rounded-lg border text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-purple-500 ${
+    isDark
+      ? 'bg-slate-700 border-slate-600 text-white placeholder-slate-400'
+      : 'bg-white border-slate-300 text-slate-900 placeholder-slate-500'
+  }`;
+
+  if (submitted) {
+    return (
+      <div className={`p-6 rounded-xl border ${isDark ? 'bg-slate-700 border-slate-600 text-green-400' : 'bg-green-50 border-green-200 text-green-700'}`}>
+        <p className="font-semibold text-lg">Thank you for your feedback! 🎉</p>
+        <p className="text-sm mt-1 opacity-75">We appreciate you taking the time to share your thoughts.</p>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-4 text-left">
+      <div>
+        <label className={`block text-sm font-medium mb-1 ${isDark ? 'text-slate-300' : 'text-slate-700'}`}>
+          Your Name
+        </label>
+        <input
+          type="text"
+          placeholder="John Doe"
+          value={form.name}
+          onChange={(e) => setForm({ ...form, name: e.target.value })}
+          className={inputClass}
+          required
+        />
+      </div>
+      <div>
+        <label className={`block text-sm font-medium mb-1 ${isDark ? 'text-slate-300' : 'text-slate-700'}`}>
+          Your Feedback
+        </label>
+        <textarea
+          rows={4}
+          placeholder="Share your thoughts, suggestions, or experience..."
+          value={form.message}
+          onChange={(e) => setForm({ ...form, message: e.target.value })}
+          className={inputClass}
+          required
+        />
+      </div>
+      <button
+        type="submit"
+        className="w-full py-3 rounded-lg font-semibold text-white bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 transition-all duration-200"
+      >
+        Submit Feedback
+      </button>
+    </form>
   );
 };
 
