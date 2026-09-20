@@ -5,6 +5,14 @@
 > ⭐ Star this repository to support the project and attract contributors!
 
 ---
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![GitHub stars](https://img.shields.io/github/stars/devayanm/Inboxly?style=social)](https://github.com/devayanm/Inboxly/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/devayanm/Inboxly?style=social)](https://github.com/devayanm/Inboxly/network/members)
+[![GitHub issues](https://img.shields.io/github/issues/devayanm/Inboxly)](https://github.com/devayanm/Inboxly/issues)
+[![GitHub pull requests](https://img.shields.io/github/issues-pr/devayanm/Inboxly)](https://github.com/devayanm/Inboxly/pulls)
+
+---
 [![OSCI-Project-Banner.png](https://i.postimg.cc/76mJvBmF/OSCI-Project-Banner.png)](https://postimg.cc/8JfzMb84)
 
 ## 🎯 Vision
