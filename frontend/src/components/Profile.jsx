@@ -204,12 +204,12 @@ function Profile() {
 
 						<motion.div variants={itemVariants} className="col-span-1 md:col-span-2">
 							<label className={(isDark ? "text-[#E5E5E5]" : "text-[#14213D]") + " block text-xs font-medium uppercase tracking-wide"}>About</label>
-							<input
-								type="text"
+							<textarea
+								rows={3}
 								value={draftProfile.about}
 								onChange={(e) => setDraftProfile(prev => ({ ...prev, about: e.target.value }))}
 								placeholder="Short summary about you..."
-								className={(isDark ? "border-[#E5E5E5]/20 bg-[#000000] text-[#FFFFFF] placeholder:text-[#E5E5E5]/70" : "border-[#14213D]/20 bg-white text-[#14213D] placeholder:text-[#14213D]/50") + " mt-1 w-full rounded-lg border px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#FCA311]"}
+								className={(isDark ? "border-[#E5E5E5]/20 bg-[#000000] text-[#FFFFFF] placeholder:text-[#E5E5E5]/70" : "border-[#14213D]/20 bg-white text-[#14213D] placeholder:text-[#14213D]/50") + " mt-1 w-full rounded-lg border px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#FCA311] resize-none"}
 							/>
 						</motion.div>
 
