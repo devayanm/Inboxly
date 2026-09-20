@@ -35,6 +35,10 @@ export const authorizeRoles = (...roles) => {
 
     const hasRole = roles.includes(req.user.role);
     if (!hasRole) {
+      console.warn(
+        `[FORBIDDEN] userId=${req.user._id} role=${req.user.role} ` +
+        `requiredRoles=[${roles.join(",")}] route=${req.method} ${req.originalUrl}`
+      );
       return res.status(403).json({ message: "Forbidden" });
     }
 
