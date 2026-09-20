@@ -155,5 +155,15 @@ Full contribution docs available in `CONTRIBUTING.md`.
 
 ---
 
+## 👥 Contributors
+
+Thanks to everyone who has contributed to Inboxly!
+
+<a href="https://github.com/devayanm/Inboxly/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=devayanm/Inboxly" alt="Contributors" />
+</a>
+
+---
+
 ## 📄 License
 MIT License — free for open-source and commercial use.
