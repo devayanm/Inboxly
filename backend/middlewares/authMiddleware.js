@@ -30,11 +30,18 @@ export const authMiddleware = async (req, res, next) => {
 export const authorizeRoles = (...roles) => {
   return (req, res, next) => {
     if (!req.user) {
+      console.warn(
+        `[AUTH] Unauthenticated access attempt to ${req.method} ${req.originalUrl}`
+      );
       return res.status(401).json({ message: "Unauthorized" });
     }
 
     const hasRole = roles.includes(req.user.role);
     if (!hasRole) {
+      console.warn(
+        `[AUTH] Forbidden: user=${req.user._id} role=${req.user.role} ` +
+        `requiredRoles=${roles.join(",")} route=${req.method} ${req.originalUrl}`
+      );
       return res.status(403).json({ message: "Forbidden" });
     }
 
