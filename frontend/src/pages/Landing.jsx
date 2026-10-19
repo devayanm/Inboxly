@@ -256,7 +256,7 @@ const LandingPage = () => {
                 We've built a suite of tools for robust, real-time communication. All the features you need, none of the bloat.
               </p>
             </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 relative group">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 relative">
               {/* Decorative background elements */}
               <div className={`absolute inset-0 ${isDark ? 'bg-[#171C2A]/5' : 'bg-slate-100/30'} rounded-3xl blur-3xl -z-10 group-hover:bg-opacity-20 transition-all duration-500`}></div>
               {Object.entries(features).map(([category, items]) => (
@@ -470,7 +470,10 @@ const LandingPage = () => {
                 Get Started for Free
               </button>
               <button
-                onClick={() => navigate('/docs')}
+                onClick={() => {
+                  const el = document.getElementById('docs');
+                  if (el) el.scrollIntoView({ behavior: 'smooth' });
+                }}
                 className={`${isDark ? 'bg-slate-800 text-slate-200 border-slate-700 hover:bg-slate-700' : 'bg-slate-200 text-slate-900 border-slate-300 hover:bg-slate-300'} font-semibold py-3 px-6 rounded-lg border transition-colors w-full sm:w-auto cursor-pointer`}
               >
                 View Documentation
