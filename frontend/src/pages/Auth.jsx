@@ -19,7 +19,25 @@ export default function Auth() {
   const [loading, setLoading] = useState(false);
   const [msg, setMsg] = useState("");
   const [error, setError] = useState(null);
+  const [fieldErrors, setFieldErrors] = useState({});
   const navigate = useNavigate();
+
+  const validateForm = () => {
+    const errors = {};
+    if (!isLoginView) {
+      if (!formData.name || formData.name.trim().length < 2) {
+        errors.name = "Full name must be at least 2 characters.";
+      }
+    }
+    if (!formData.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      errors.email = "Please enter a valid email address.";
+    }
+    if (!formData.password || formData.password.length < 6) {
+      errors.password = "Password must be at least 6 characters.";
+    }
+    setFieldErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
 
   const API_BASE_URL =
     import.meta.env.VITE_API_URL || "https://inboxly-q38f.onrender.com";
@@ -31,9 +49,10 @@ export default function Auth() {
   // Handle submit
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
     setMsg("");
     setError(null);
+    if (!validateForm()) return;
+    setLoading(true);
 
     const url = isLoginView
       ? `${API_BASE_URL}/api/auth/login`
@@ -118,7 +137,7 @@ export default function Auth() {
             {msg && (
               <p className="mb-4 text-sm text-center text-green-400">{msg}</p>
             )}
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4" noValidate>
               {!isLoginView && (
                 <>
                   <div>
@@ -127,10 +146,10 @@ export default function Auth() {
                       type="text"
                       name="name"
                       onChange={handleChange}
-                      className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg"
+                      className={`w-full px-4 py-3 bg-slate-700 border rounded-lg ${fieldErrors.name ? "border-red-500" : "border-slate-600"}`}
                       placeholder="John Doe"
-                      required
                     />
+                    {fieldErrors.name && <p className="mt-1 text-xs text-red-400">{fieldErrors.name}</p>}
                   </div>
                   <div>
                     <label className="block text-sm mb-1">Role</label>
@@ -151,10 +170,10 @@ export default function Auth() {
                   type="email"
                   name="email"
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg"
+                  className={`w-full px-4 py-3 bg-slate-700 border rounded-lg ${fieldErrors.email ? "border-red-500" : "border-slate-600"}`}
                   placeholder="you@example.com"
-                  required
                 />
+                {fieldErrors.email && <p className="mt-1 text-xs text-red-400">{fieldErrors.email}</p>}
               </div>
               <div>
                 <label className="block text-sm mb-1">Password</label>
@@ -162,10 +181,10 @@ export default function Auth() {
                   type="password"
                   name="password"
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg"
+                  className={`w-full px-4 py-3 bg-slate-700 border rounded-lg ${fieldErrors.password ? "border-red-500" : "border-slate-600"}`}
                   placeholder="••••••••"
-                  required
                 />
+                {fieldErrors.password && <p className="mt-1 text-xs text-red-400">{fieldErrors.password}</p>}
               </div>
               <button
                 type="submit"
