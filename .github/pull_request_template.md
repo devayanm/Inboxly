@@ -1,14 +1,27 @@
-## Summary
-Describe the changes and why they are needed.
+## Description
 
-## Related issue
-Fixes # (issue number)
+<!-- Describe what changes you made and why -->
 
-## Changes
-- Change 1
-- Change 2
+## Related Issue
+
+Fixes #<!-- issue number -->
+
+## Type of Change
+
+- [ ] Bug fix
+- [ ] New feature
+- [ ] Enhancement
+- [ ] Documentation
+- [ ] Refactor
+
+## Screenshots (if applicable)
+
+<!-- Add screenshots for UI changes -->
 
 ## Checklist
-- [ ] Tests added/updated
-- [ ] Documentation updated
-- [ ] Lint passed
+
+- [ ] I have self-reviewed my code
+- [ ] My changes follow the project's code style
+- [ ] I have tested my changes locally
+- [ ] I have updated documentation if needed
+- [ ] I have not introduced any breaking changes
