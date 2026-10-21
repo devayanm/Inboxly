@@ -1,9 +1,11 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { useTheme } from '../App.jsx'; // Import the theme hook
 
 function Profile() {
 	const { isDark } = useTheme(); // Use centralized theme
+	const navigate = useNavigate();
 	
 	const emptyProfile = {
 		fullName: '',
@@ -112,6 +114,13 @@ function Profile() {
 
   return (
 		<div className={(isDark ? "bg-[#000000] text-[#FFFFFF]" : "bg-[#FFFFFF] text-[#14213D]") + " min-h-screen w-full p-0"}>
+			<button
+				onClick={() => navigate('/homepage')}
+				className={(isDark ? "bg-[#1a1a1a] text-[#FFFFFF] hover:bg-[#333]" : "bg-[#f0f0f0] text-[#14213D] hover:bg-[#e0e0e0]") + " fixed top-4 left-4 z-50 flex items-center gap-2 px-4 py-2 rounded-lg transition-colors duration-200 text-sm font-medium shadow-md"}
+				aria-label="Back to home"
+			>
+				&#8592; Home
+			</button>
 			<motion.div
 				className={(isDark ? "bg-[#14213D]" : "bg-[#E5E5E5]") + " w-full rounded-none shadow-none ring-0 overflow-hidden"}
 				variants={containerVariants}
